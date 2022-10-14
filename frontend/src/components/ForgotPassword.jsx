@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import AuthContext from '../context/AuthProvider';
 import MonsterBtn from './MonsterBtn';
 import homeWp from '../assets/images/homeWallpaper.jpg';
 import "../App.css";
@@ -7,9 +9,11 @@ import "../App.css";
 
 function ForgotPassword() {
     const [email, setEmail] = useState("");
+    const {auth} = useContext(AuthContext);
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [loader, setLoader] = useState(false);
+    const navigate = useNavigate();
 
     const handleForgotPassword = async (e) => {
         e.preventDefault();
@@ -35,12 +39,15 @@ function ForgotPassword() {
         }
     }
     useEffect(() => {
+        if(auth?.name !== undefined) {
+            navigate('/home');
+        }
         return () => {
             window.localStorage.removeItem("error");
             window.localStorage.removeItem("success");
             clearTimeout();
         }
-    }, [])
+    }, [auth?.name])
 
 
     const displayErrorUtil = (exception) => {

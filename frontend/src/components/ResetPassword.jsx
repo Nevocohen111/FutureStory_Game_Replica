@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+import AuthContext from '../context/AuthProvider';
 import { useNavigate } from 'react-router-dom';
 import MonsterBtn from './MonsterBtn';
 import resW from '../assets/images/rsW.jpg';
@@ -6,6 +7,7 @@ import '../App.css';
 
 function ResetPassword({ token }) {
     const [password, setPassword] = useState("");
+    const {auth} = useContext(AuthContext);
     const [confirmPassword, setConfirmPassword] = useState("");
     const [error, setError] = useState("");
     const navigate = useNavigate();
@@ -31,12 +33,15 @@ function ResetPassword({ token }) {
     }
 
     useEffect(() => {
+        if(auth?.name !== undefined) {
+            navigate('/home');
+        }
         return () => {
             window.localStorage.removeItem("error");
             window.localStorage.removeItem("success");
             clearTimeout();
         }
-    }, [])
+    }, [auth?.name])
 
     const displayErrorUtil = (ex) => {
         setError(ex);

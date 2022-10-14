@@ -1,11 +1,13 @@
-import React, { useState, useRef, useEffect } from "react"
+import React, { useState, useRef, useEffect, useContext } from "react";
 import '../Register.css';
 import { useNavigate } from "react-router-dom";
 import MonsterBtn from "./MonsterBtn";
+import AuthContext from "../context/AuthProvider";
 import TermsAndConditionsPortal from "./TermsAndConditionsPortal";
 
 export default function Register() {
     const [name, setName] = useState("");
+    const {auth} = useContext(AuthContext);
     const [email, setEmail] = useState("");
     const [confirmEmail, setConfirmEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -106,6 +108,9 @@ export default function Register() {
     }
 
     useEffect(() => {
+        if(auth?.name !== undefined) {
+            navigate(`/home`)
+        }
         setInterval(() => {
          setShowPage(true);
         }, 1000);
@@ -113,7 +118,7 @@ export default function Register() {
         return () => {
             clearInterval();
         }
-    }, []);
+    }, [auth?.name]);
 
     return (
         <>

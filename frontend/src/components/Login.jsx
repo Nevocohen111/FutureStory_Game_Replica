@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import MonsterBtn from './MonsterBtn';
 import AuthContext from '../context/AuthProvider';
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -15,6 +15,7 @@ function Login({ registered, logout, login, resetOK }) {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [name, setName] = useState("");
+    const location = useLocation();
     const navigate = useNavigate();
     const inputRef = React.useRef(null);
     const [cookies, setCookie] = useCookies(['user']);
@@ -39,6 +40,9 @@ function Login({ registered, logout, login, resetOK }) {
     };
 
     useEffect(() => {
+        if(auth?.name !== undefined){
+            navigate('/home');
+        }
         setInterval(() => {
             setShowPage(true);
         }, 1000);
@@ -46,7 +50,7 @@ function Login({ registered, logout, login, resetOK }) {
         return () => {
             clearInterval();
         }
-    }, []);
+    }, [auth?.name]);
 
     useEffect(() => {
         setTimeout(() => {
