@@ -1,6 +1,5 @@
 
   .section-one {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.2));
     background-size: cover;
     background-position: calc(50% - 50px);
     filter: brightness();

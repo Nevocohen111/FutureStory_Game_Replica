@@ -98,14 +98,14 @@ class CardProfile extends React.Component {
   static contextType = AuthContext;
   
           
-  componentDidMount = () => {
+  componentDidMount = async () => {
       this.setState({showLoader : true});
       document.getElementById('bucket').style.display = 'none';
     setTimeout(() => {
       document.getElementById('bucket').style.display = 'block';
       this.setState({showLoader : false});
     }, 1500);
-    fetch(`http://localhost:8080/profile/getPicture?authName=${this.context.auth.name}`,{
+    await fetch(`http://localhost:8080/profile/getPicture?authName=${this.context.auth.name}`,{
       method: 'GET',
       headers: { 'Content-Type': 'application/json'},
       mode : 'cors'
@@ -172,10 +172,10 @@ class CardProfile extends React.Component {
       })
     };
     const response = await fetch('http://localhost:8080/profile/add', requestOptions);
-        if(response.status === 405)
-          alert("Whoops! either the picture is to big or you didn't upload a picture");
-
-
+    //if the response error code is 405 then throw error
+    if(response.status === 405){
+      alert("Whoops! either the picture is to big or you didn't upload a picture");
+    }
     fetch(`http://localhost:8080/profile/getPicture?authName=${this.context.auth.name}`,{
       method: 'GET',
       headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },

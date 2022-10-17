@@ -13,19 +13,6 @@
   --color-contacts: #2980B9;
 }
 
-.Link404 {
-  color: #4169e1;
-  text-decoration: underline;
-  text-transform: uppercase;
-  text-align: center;
-  font-size: 2rem;
-}
-
-.Link404:hover {
-  color: blue;
-  text-decoration:underline;
-}
-
 .submitFp {
   background-color: #4CAF50;
   border: none;
@@ -133,7 +120,6 @@ body {
   /* transition for the change in background color (occurring as the nav items are pressed) */
   transition: all 0.3s ease-in-out;
 }
-
 .App .Navbar h2:before {
   /* with a pseudo element include a string, which is hidden by default below the header, to the left of the page  */
   content: 'borntofrappé';
@@ -178,6 +164,7 @@ body {
   /* position relative to absolute position the connected pseudo element */
   position: relative;
 }
+
 
 .App .Navbar ul li a:before {
   /* include a faux-border with a pseudo element  */
@@ -224,11 +211,25 @@ body {
   font-size: 1.5rem;
 }
 
+
 .App h2 {
   color: var(--color-home);
   text-transform: uppercase;
   text-align: center;
   font-size: 2rem;
+}
+
+.Link404 {
+  color: #4169e1;
+  text-decoration: underline;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.Link404:hover {
+  color: blue;
+  text-decoration:underline;
 }
 
 /*
@@ -312,6 +313,7 @@ body {
   }
 }
 
+
 @media (min-width: 1280px){
   .slime1 {
     top: calc(510px + (100vw - 1280px) * .4);
@@ -347,5 +349,6 @@ body {
     height: 4.921875vw;
   }
 }
+
 
 

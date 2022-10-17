@@ -1,9 +1,7 @@
-body {
-  
+body { 
   /** background image */
-  background-image: url("assets/images/websiteBackground.jpg");
-  background-position: center;
+  background-image: url("assets/images/homeWallpaper.jpg");
+  background-position: calc(50% - 0.5vw) calc(50% - 2vh);
   background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
+  background-size: calc(100% + 1vw) calc(100% + 30vh);
 }

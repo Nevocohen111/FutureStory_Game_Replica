@@ -23,21 +23,21 @@ function Navbar() {
         setLogAsNum(logAsNum - 1);
         navigate('/logout=true' , {state : {logout : auth.name + `, you have been logged out.`}});
     }
-
+     
     useEffect (() => {
         const off = document.getElementById("toggleOff");
         const on = document.getElementById("toggleOn");
         const nav = document.getElementsByClassName("Navbar")[0];
         const navHeader = document.getElementById("navHeader");
         const navItems = document.getElementsByClassName("ul")[0];
-        const wallpaper = document.getElementById('wallpaper');
+        const wallpaper = document.body;
 
         off.addEventListener("click", () => {
             setChecked(true);
-            if(location.pathname === '/home' || location.pathname === '/'){
             wallpaper.style.backgroundImage = `url(${zakWallpaper})`;
-            wallpaper.style.backgroundPosition = 'calc(50% - -20rem) calc(50% - 10rem)';
-            }
+            wallpaper.style.backgroundPosition = "calc(50% - 1vw) calc(50% - 2vh)";
+            wallpaper.style.backgroundRepeat = "no-repeat";
+            wallpaper.style.backgroundSize = "cover";
             nav.style.backgroundColor ="#383838";
             navHeader.style.color = "white";
             navItems.style.background = "linear-gradient( to top right,rgba(156,204,101 ,1) 0%, rgba(38,198,218 ,1) 50%)";
@@ -52,16 +52,19 @@ function Navbar() {
             window.localStorage.setItem('navItemsBackground', JSON.stringify("linear-gradient( to top right,rgba(156,204,101 ,1) 0%, rgba(38,198,218 ,1) 50%)"));
             window.localStorage.setItem('navItemsBoxShadow', JSON.stringify("1px 1px 30px rgba(38,198,218 ,1)"));
             window.localStorage.setItem('wallpaper', JSON.stringify(zakWallpaper));
-            window.localStorage.setItem('wallpaperPosition', JSON.stringify('calc(50% - -20rem) calc(50% - 10rem)'));
+            window.localStorage.setItem('wallpaperPosition', JSON.stringify('calc(50% - 1vw) calc(50% - 2vh)'));
+            window.localStorage.setItem('wallpaperRepeat', JSON.stringify('no-repeat'));
+            window.localStorage.setItem('wallpaperSize', JSON.stringify('cover'));
 
+        
 
         });
         on.addEventListener("click", () => {
             setChecked(false);
-            if(location.pathname === '/home' || location.pathname === '/'){
             wallpaper.style.backgroundImage = `url(${homeWallpaper})`;
-            wallpaper.style.backgroundPosition = "calc(50% - 50px) calc(50% - 50px)";
-            }
+            wallpaper.style.backgroundPosition = "calc(50% - 0.5vw) calc(50% - 2vh)";
+            wallpaper.style.backgroundRepeat = "no-repeat";
+            wallpaper.style.backgroundSize = 'calc(100% + 1vw) calc(100% + 30vh)';
             nav.style.backgroundColor = "#f0f8ff";
             navHeader.style.color = "black";
             on.style.display = "none";
@@ -76,7 +79,10 @@ function Navbar() {
             window.localStorage.setItem('navItemsBackground', JSON.stringify("linear-gradient( to top right, rgba(255,87,34,1) 0%, rgba(251,140,0 ,1) 100%)"));
             window.localStorage.setItem('navItemsBoxShadow', JSON.stringify("1px 1px 30px rgba(255,111,0 ,1)"));
             window.localStorage.setItem('wallpaper', JSON.stringify(`${homeWallpaper}`));
-            window.localStorage.setItem('wallpaperPosition', JSON.stringify('calc(50% - 50px) calc(50% - 50px)'));
+            window.localStorage.setItem('wallpaperPosition', JSON.stringify("calc(100% - 0.5vw) calc(60% - 2vh)"));
+            window.localStorage.setItem('wallpaperRepeat', JSON.stringify('no-repeat'));
+            window.localStorage.setItem('wallpaperSize', JSON.stringify('calc(100% + 1vw) calc(100% + 30vh)'));
+
 
         });
     }, [checked]);
@@ -87,8 +93,8 @@ function Navbar() {
         const nav = document.getElementsByClassName("Navbar")[0];
         const navHeader = document.getElementById("navHeader");
         const navItems = document.getElementsByClassName("ul")[0];
-        const wallpaper = document.getElementById('wallpaper');
-
+        const wallpaper = document.body;
+        
         if(JSON.parse(window.localStorage.getItem('checked')) === "true") {
             setChecked(true);
             nav.style.backgroundColor = JSON.parse(window.localStorage.getItem('navColor'));
@@ -100,6 +106,8 @@ function Navbar() {
             if(location.pathname === "/" || location.pathname === "/home") {
             wallpaper.style.backgroundImage = `url(${JSON.parse(window.localStorage.getItem('wallpaper'))})`;
             wallpaper.style.backgroundPosition = JSON.parse(window.localStorage.getItem('wallpaperPosition'));
+            wallpaper.style.backgroundRepeat = JSON.parse(window.localStorage.getItem('wallpaperRepeat'));
+            wallpaper.style.backgroundSize = JSON.parse(window.localStorage.getItem('wallpaperSize'));
             }
 
         }
@@ -114,29 +122,31 @@ function Navbar() {
             if(location.pathname === "/" || location.pathname === "/home") {
             wallpaper.style.backgroundImage = `url(${window.localStorage.getItem('wallpaper')})`;
             wallpaper.style.backgroundPosition = JSON.parse(window.localStorage.getItem('wallpaperPosition'));
+            wallpaper.style.backgroundRepeat = JSON.parse(window.localStorage.getItem('wallpaperRepeat'));
+            wallpaper.style.backgroundSize = JSON.parse(window.localStorage.getItem('wallpaperSize'));
             }
-
+            
         }
     }, []);
-
+ 
     return (
         <>
             <div>
-                <nav className="Navbar" style={{margin:'0',position:'fixed',top:'-1rem',left:'-1rem',width:'102%',height:'5rem',opacity:'0.7',backgroundColor:'#f0f8ff',display:'flex',alignItems:'center',justifyContent:'center',zIndex:'10000'}}>
+                <nav className="Navbar" style={{margin:'0',position:'fixed',top:'-1rem',left:'-1rem',width:'102%',height:'5rem',opacity:'0.7',backgroundColor:'#f0f8ff',display:'flex',alignItems:'center',justifyContent:'center',zIndex:'10000'}}>  
                 <div style={{position:'absolute',left:'3rem'}}>
                         <a href="/" style={{textDecoration:'none',color:'black',fontSize:'1.5rem',fontWeight:'bold'}} id="navHeader">FutureStory</a>
                     </div>
                     <div style={{position:'absolute',right:'3rem',top:"1.6rem"}}>
-                    {auth?.name !== undefined ? <DeleteUserBtn auth = {auth} logout = {logout}/>: null}
+                    {auth?.name !== undefined ? <DeleteUserBtn auth = {auth} logout = {logout}/>: null} 
                     </div>
-
+                   
                  <i id='toggleOff' class="big toggle off icon" style={{position:'absolute',left:'85rem',top:'1.6rem',color:'black'}}></i>
-
+                
                  <i id='toggleOn' class="big toggle on icon" style={{position:'absolute',left:'85rem',top:'1.6rem',color:'black'}}></i>
 
 
                     <div style={{position:'absolute',left:'14rem',top:"0.9rem"}} onClick = {() => navigate('/profile')}>
-                    {auth?.name !== undefined ? <ProfileCircle/>: null}
+                    {auth?.name !== undefined ? <ProfileCircle/>: null} 
                     </div>
 
                     <div style={{position:'relative',left:'-10rem',top:'0.2rem'}}>

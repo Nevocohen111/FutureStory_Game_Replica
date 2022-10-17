@@ -15,7 +15,6 @@ export default function Register() {
     const [isChecked, setIsChecked] = useState(false);
     const [error, setError] = useState("");
     const [portal, setPortal] = useState(false);
-    const [showPage, setShowPage] = useState(false);
     const inputRef = useRef(null);
     const navigate = useNavigate();
     
@@ -111,18 +110,11 @@ export default function Register() {
         if(auth?.name !== undefined) {
             navigate(`/home`)
         }
-        setInterval(() => {
-         setShowPage(true);
-        }, 1000);
-        setShowPage(false);
-        return () => {
-            clearInterval();
-        }
     }, [auth?.name]);
 
     return (
         <>
-           {showPage ? <div className="body">
+          <div className="body">
                 <div className="container">
                     <img className="bg-img" src="https://mariongrandvincent.github.io/HTML-Personal-website/img-codePen/bg.jpg" height={'900vh'} alt="" />
                     <div className="menu" style={{ position: 'relative' }}>
@@ -161,13 +153,9 @@ export default function Register() {
                             <br></br><br></br>
                             <div id = "error" style={{color:'red'}}></div>
                         </div>
-
                     </div>
                 </div>
-
             </div>
- : <div class="big ui active centered inline loader" style={{marginTop:'25rem'}}></div>}
-
             <MonsterBtn />
         </>
     )

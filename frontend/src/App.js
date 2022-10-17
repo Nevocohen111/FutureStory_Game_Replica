@@ -54,7 +54,7 @@ const App = () => {
         <Route path={"/activate"} element={<Verify accessToken={accessToken} />} />
         <Route path ="/loginResetSuccess=true" element={<Login resetOK={location.state?.resetOK}/>}/>
         <Route path="/registered=true" element={<Login registered={location.state?.registered} />} />
-        <Route path="/login" element={<Login />} />
+         <Route path ="/login" element={<Login/>}/>
         <Route path="/login=true" element={<Login login={location.state?.login} />} />
         <Route path="/logout=true" element={<Login logout={location.state?.logout} />} />
         <Route path="/profile" element={<CardProfile />} />

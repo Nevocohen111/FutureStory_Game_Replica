@@ -11,7 +11,7 @@ function NotFound({setOnShow}) {
         document.body.style.backgroundPosition = "calc(25vw + 1px) calc(20vh + 1px)";
     }, [])
 
-
+    
   return (
     <div>
       <div style={{position:'absolute',top:'5%',left:'50%',transform:'translate(-50%,-50%)',textAlign:'center'}}>
@@ -20,7 +20,7 @@ function NotFound({setOnShow}) {
         <h3>Try going back to the</h3>
         <a href="/" className='Link404'>Homepage</a>
         </div>
-
+      
     </div>
   )
 };

@@ -84,8 +84,6 @@ function ResetPassword({ token }) {
                                     <br></br><br></br>
                                     <input type="password" style={{ opacity: '0.7' }} placeholder="Confirm Password" value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} />
                                     <input type="hidden" value={token} />
-
-
                                     <br></br><br></br>
                                     <button class=" submitFp" onClick={checkIfPasswordMatch} style={{position:'relative',left:'0.2rem'}}>Confirm</button>
                                     <div style={{ position: 'relative', top: '2rem' }}>

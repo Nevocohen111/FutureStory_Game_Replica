@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthProvider';
 import MonsterBtn from './MonsterBtn';
-import homeWp from '../assets/images/homeWallpaper.jpg';
+import homeWp from '../assets/images/websiteBackground.jpg';
 import "../App.css";
 
 
@@ -66,8 +66,8 @@ function ForgotPassword() {
 
     return (
         <>
-            <div class="form-gap"></div>
-            <div className='container' style={{ padding: '10rem', backgroundImage: `url(${homeWp})`, backgroundPosition: 'center' }}>
+            <div class="form-gap "></div>
+            <div className='container ' style={{ padding: '10rem', backgroundPosition: 'center' , backgroundSize: 'cover', backgroundImage: `url(${homeWp})` }}>
                 <div class="row">
                     <div class="col-md-4 col-md-offset-4">
                         <div class="panel panel-default">

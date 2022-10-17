@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState, useContext, useEffect, useRef} from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import MonsterBtn from './MonsterBtn';
 import AuthContext from '../context/AuthProvider';
@@ -21,6 +21,7 @@ function Login({ registered, logout, login, resetOK }) {
     const [cookies, setCookie] = useCookies(['user']);
     const [isCookie, setIsCookie] = useState(false);
     const [showPage, setShowPage] = useState(false);
+    const passwordRef = useRef(null);
 
 
     const submit = () => {
@@ -43,13 +44,7 @@ function Login({ registered, logout, login, resetOK }) {
         if(auth?.name !== undefined){
             navigate('/home');
         }
-        setInterval(() => {
-            setShowPage(true);
-        }, 1000);
-        setShowPage(false);
-        return () => {
-            clearInterval();
-        }
+
     }, [auth?.name]);
 
     useEffect(() => {
@@ -85,6 +80,16 @@ function Login({ registered, logout, login, resetOK }) {
         setCookie('Name', name, { path: '/' });
         setCookie('Password', password, { path: '/' });
     }
+
+
+  const showPasswordCheckBox = event => {
+    if (event.target.checked) {
+      passwordRef.current.type = "text";
+    } else {
+        passwordRef.current.type = "password";
+    }
+
+  };
 
 
     const displayErrorUtil = () => {
@@ -140,8 +145,8 @@ function Login({ registered, logout, login, resetOK }) {
 
     return (
         <>
-            {showPage ? <div className="body">
-                <div className="container">
+             <div className="body" id = "wallpaper">
+                <div className="container"  >
                     <img className="bg-img" src="https://mariongrandvincent.github.io/HTML-Personal-website/img-codePen/bg.jpg" height={'900vh'} alt="" />
 
                     <div className="menu">
@@ -156,8 +161,19 @@ function Login({ registered, logout, login, resetOK }) {
                             <label className="label">EMAIL</label>
                             <input className='inputs'   placeholder="" type="email" value={email} onChange={(e) => setEmail(e.target.value)} style={{border:'none'}} required />
 
-                            <label className="label">PASSWORD</label>
-                            <input className='inputs'  placeholder="" type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{border:'none'}} required />
+
+                            <div className="check">
+                                <label className="label" style={{ position: 'relative', left: '11rem', top: '0.33rem' }}>
+                                    <input id="check" type="checkbox" className="checkbox" value={isCookie} onChange={showPasswordCheckBox} />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26px" height="23px">
+                                        <path className="path-back" d="M1.5,6.021V2.451C1.5,2.009,1.646,1.5,2.3,1.5h18.4c0.442,0,0.8,0.358,0.8,0.801v18.398c0,0.442-0.357,0.801-0.8,0.801H2.3c-0.442,0-0.8-0.358-0.8-0.801V6" />
+                                        <path className="path-moving" d="M24.192,3.813L11.818,16.188L1.5,6.021V2.451C1.5,2.009,1.646,1.5,2.3,1.5h18.4c0.442,0,0.8,0.358,0.8,0.801v18.398c0,0.442-0.357,0.801-0.8,0.801H2.3c-0.442,0-0.8-0.358-0.8-0.801V6" />
+                                    </svg>
+                                </label>
+                                <label className="label" style={{marginTop:'1rem',marginLeft:'1.5rem'}}>PASSWORD</label>
+
+                            </div>
+                            <input className='inputs' ref = {passwordRef}  placeholder="" type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{border:'none'}} required />
 
                             <div className="check">
                                 <label className="label" style={{marginLeft:'3rem'}}>
@@ -181,10 +197,7 @@ function Login({ registered, logout, login, resetOK }) {
 
                     </div>
                 </div>
-
             </div>
-                : <div class="big ui active centered inline loader" style={{ marginTop: '25rem' }}></div>}
-
             <MonsterBtn />
         </>
     )
