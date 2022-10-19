@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect, useRef} from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate} from 'react-router-dom';
 import MonsterBtn from './MonsterBtn';
 import AuthContext from '../context/AuthProvider';
 import "react-confirm-alert/src/react-confirm-alert.css";
@@ -15,12 +15,11 @@ function Login({ registered, logout, login, resetOK }) {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
     const [name, setName] = useState("");
-    const location = useLocation();
     const navigate = useNavigate();
     const inputRef = React.useRef(null);
     const [cookies, setCookie] = useCookies(['user']);
+    const [loader, setLoader] = useState(false);
     const [isCookie, setIsCookie] = useState(false);
-    const [showPage, setShowPage] = useState(false);
     const passwordRef = useRef(null);
 
 
@@ -44,7 +43,7 @@ function Login({ registered, logout, login, resetOK }) {
         if(auth?.name !== undefined){
             navigate('/home');
         }
-
+    
     }, [auth?.name]);
 
     useEffect(() => {
@@ -81,14 +80,14 @@ function Login({ registered, logout, login, resetOK }) {
         setCookie('Password', password, { path: '/' });
     }
 
-
+    
   const showPasswordCheckBox = event => {
     if (event.target.checked) {
       passwordRef.current.type = "text";
     } else {
         passwordRef.current.type = "password";
     }
-
+    
   };
 
 
@@ -106,12 +105,15 @@ function Login({ registered, logout, login, resetOK }) {
                     document.getElementsByClassName("inputs")[i].style.border = "none";
                     document.getElementsByClassName("inputs")[i].style.animation = "none";
                     document.getElementById("error").innerHTML = "";
+                    setError("");
                 }
             }, 3000);
+
         }
     }
 
     const handleLogin = async () => {
+        setLoader(true);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -133,11 +135,15 @@ function Login({ registered, logout, login, resetOK }) {
                 if (isCookie)
                     submit();
             } else {
+            
                 displayErrorUtil();
             }
-        } catch (err) {
+
+        }
+        catch (err) {
             displayErrorUtil();
         }
+        setLoader(false);
     }
 
 
@@ -171,7 +177,7 @@ function Login({ registered, logout, login, resetOK }) {
                                     </svg>
                                 </label>
                                 <label className="label" style={{marginTop:'1rem',marginLeft:'1.5rem'}}>PASSWORD</label>
-
+                            
                             </div>
                             <input className='inputs' ref = {passwordRef}  placeholder="" type="password" value={password} onChange={(e) => setPassword(e.target.value)} style={{border:'none'}} required />
 
@@ -194,6 +200,8 @@ function Login({ registered, logout, login, resetOK }) {
                             {login && <h4 id="login" className="login" style={{ color: 'green' }}>{login}</h4>}
                             {resetOK && <h4 id="reset" style={{ color: 'green' }}>{resetOK}</h4>}
                         </div>
+                        {loader && !error && <div class="big ui active centered inline loader" style={{ marginRight: '6.5rem',zIndex:'200000' }}></div>}
+                        
 
                     </div>
                 </div>

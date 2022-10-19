@@ -14,6 +14,7 @@ export default function Register() {
     const [confirmPassword, setConfirmPassword] = useState("");
     const [isChecked, setIsChecked] = useState(false);
     const [error, setError] = useState("");
+    const [loader, setLoader] = useState(false);
     const [portal, setPortal] = useState(false);
     const inputRef = useRef(null);
     const navigate = useNavigate();
@@ -52,10 +53,12 @@ export default function Register() {
                         document.getElementsByClassName("inputs")[i].style.border = "none";
                         document.getElementsByClassName("inputs")[i].style.animation = "none";
                         document.getElementById("error").innerHTML = "";
+                        setError("");
                     }
                 }, 3000);
             }
         }
+
     }
 
     const handleCheckbox = (e) => {
@@ -71,6 +74,7 @@ export default function Register() {
 
 
     const handleRegister = async () => {
+        setLoader(true);
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -96,10 +100,13 @@ export default function Register() {
                         document.getElementsByClassName("inputs")[i].style.border = "none";
                         document.getElementsByClassName("inputs")[i].style.animation = "none";
                         document.getElementById("error").innerHTML = "";
+                        setError("");
                     }
                 }, 3000);
             }
-        }else {
+            setLoader(false);
+        }
+        else {
         setError("")
         window.localStorage.removeItem("error");
         navigate(`/registered=true`, { state : { registered: name + ", Please verify your email and log in." } });
@@ -153,6 +160,7 @@ export default function Register() {
                             <br></br><br></br>
                             <div id = "error" style={{color:'red'}}></div>
                         </div>
+                        {loader && !error && <div class="big ui active centered inline loader" style={{ marginRight: '6.5rem',zIndex:'200000' }}></div>}
                     </div>
                 </div>
             </div>

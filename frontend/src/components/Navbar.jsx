@@ -103,13 +103,10 @@ function Navbar() {
             navHeader.style.color = JSON.parse(window.localStorage.getItem('navHeaderColor'));
             navItems.style.background = JSON.parse(window.localStorage.getItem('navItemsBackground'));
             navItems.style.boxShadow = JSON.parse(window.localStorage.getItem('navItemsBoxShadow'));
-            if(location.pathname === "/" || location.pathname === "/home") {
             wallpaper.style.backgroundImage = `url(${JSON.parse(window.localStorage.getItem('wallpaper'))})`;
             wallpaper.style.backgroundPosition = JSON.parse(window.localStorage.getItem('wallpaperPosition'));
             wallpaper.style.backgroundRepeat = JSON.parse(window.localStorage.getItem('wallpaperRepeat'));
             wallpaper.style.backgroundSize = JSON.parse(window.localStorage.getItem('wallpaperSize'));
-            }
-
         }
         if(JSON.parse(window.localStorage.getItem('checked')) === "false") {
             setChecked(false);
@@ -119,13 +116,10 @@ function Navbar() {
             navHeader.style.color = JSON.parse(window.localStorage.getItem('navHeaderColor'));
             navItems.style.background = JSON.parse(window.localStorage.getItem('navItemsBackground'));
             navItems.style.boxShadow = JSON.parse(window.localStorage.getItem('navItemsBoxShadow'));
-            if(location.pathname === "/" || location.pathname === "/home") {
             wallpaper.style.backgroundImage = `url(${window.localStorage.getItem('wallpaper')})`;
             wallpaper.style.backgroundPosition = JSON.parse(window.localStorage.getItem('wallpaperPosition'));
             wallpaper.style.backgroundRepeat = JSON.parse(window.localStorage.getItem('wallpaperRepeat'));
-            wallpaper.style.backgroundSize = JSON.parse(window.localStorage.getItem('wallpaperSize'));
-            }
-            
+            wallpaper.style.backgroundSize = JSON.parse(window.localStorage.getItem('wallpaperSize'));   
         }
     }, []);
  
