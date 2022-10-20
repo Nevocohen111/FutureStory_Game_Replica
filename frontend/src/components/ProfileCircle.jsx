@@ -8,15 +8,6 @@ export default function ProfileCircle () {
   const [loader, setLoader] = React.useState(false);
 
 
-  useEffect(() => {
-    setInterval(() => {
-      setLoader(true);
-    }, 2000);
-    setLoader(false);
-    return () => {
-      clearInterval();
-    }
-  }, [])
 
 
   return (
