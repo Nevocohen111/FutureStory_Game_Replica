@@ -32,4 +32,6 @@ public class User extends BaseEntity {
     private String verified;
 
     private String fpToken;
+
+    private String membership;
 }
