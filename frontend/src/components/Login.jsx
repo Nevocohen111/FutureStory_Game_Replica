@@ -131,6 +131,7 @@ function Login({ registered, logout, login, resetOK }) {
                 const verified = data.verified;
                 setLogAsNum(logAsNum + 1);
                 setAuth({ name, email, verified });
+                window.localStorage.setItem('profile', JSON.stringify("profile"));
                 navigate('/home&authorized=true');
                 if (isCookie)
                     submit();

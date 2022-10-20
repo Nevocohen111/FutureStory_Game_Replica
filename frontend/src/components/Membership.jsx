@@ -1,5 +1,4 @@
 import React, { useState, useContext, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom';
 import AuthContext from '../context/AuthProvider';
 import "../Membership.css";
 
@@ -12,14 +11,21 @@ function Membership() {
     const [testerLoader, setTesterLoader] = useState(false);
     const [gmLoader, setGmLoader] = useState(false);
     const { auth } = useContext(AuthContext);
-    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(auth?.name !== undefined){
+            window.localStorage.setItem("member", JSON.stringify("member"));
+        }
+    }, [auth?.name])
 
 
     useEffect(() => {
-        if (auth?.name === undefined) {
-            navigate(`/home`)
+        if (!window.localStorage.getItem("member")) {
+            window.location.href = "/login";
         }
-    }, [auth?.name]);
+
+    }, []);
+
 
 
 

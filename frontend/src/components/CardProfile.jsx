@@ -119,9 +119,15 @@ class CardProfile extends React.Component {
       this.setState({imagePreviewUrl : data.url, name : data.name, status : data.status});
     })
     .catch(err => console.log(err));
-
     return () => {
       clearTimeout()};
+  }
+
+
+  componentDidMount =  () => {
+    if(!window.localStorage.getItem("profile")){
+       window.location.href = "/home";
+    }
   }
 
   

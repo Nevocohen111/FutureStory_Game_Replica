@@ -1,7 +1,6 @@
 import React from 'react'
 import '../Home.css';
 import MonsterBtn from './MonsterBtn';
-import homeWallpaper from '../assets/images/homeWallpaper.jpg';
 
 
 
