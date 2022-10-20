@@ -35,9 +35,9 @@ function Navbar() {
         off.addEventListener("click", () => {
             setChecked(true);
             wallpaper.style.backgroundImage = `url(${zakWallpaper})`;
-            wallpaper.style.backgroundPosition = "calc(50% - 1vw) calc(50% - 2vh)";
+            wallpaper.style.backgroundPosition = "calc(50%) calc(50% - 2vh)";
             wallpaper.style.backgroundRepeat = "no-repeat";
-            wallpaper.style.backgroundSize = "cover";
+            wallpaper.style.backgroundSize = "calc(100% + 3vw) calc(100% + 30vh)";
             nav.style.backgroundColor ="#383838";
             navHeader.style.color = "white";
             navItems.style.background = "linear-gradient( to top right,rgba(156,204,101 ,1) 0%, rgba(38,198,218 ,1) 50%)";
@@ -54,7 +54,7 @@ function Navbar() {
             window.localStorage.setItem('wallpaper', JSON.stringify(zakWallpaper));
             window.localStorage.setItem('wallpaperPosition', JSON.stringify('calc(50% - 1vw) calc(50% - 2vh)'));
             window.localStorage.setItem('wallpaperRepeat', JSON.stringify('no-repeat'));
-            window.localStorage.setItem('wallpaperSize', JSON.stringify('cover'));
+            window.localStorage.setItem('wallpaperSize', JSON.stringify('calc(100% + 3vw) calc(100% + 30vh)'));
 
         
 
@@ -62,9 +62,9 @@ function Navbar() {
         on.addEventListener("click", () => {
             setChecked(false);
             wallpaper.style.backgroundImage = `url(${homeWallpaper})`;
-            wallpaper.style.backgroundPosition = "calc(50% - 0.5vw) calc(50% - 2vh)";
+            wallpaper.style.backgroundPosition = "calc(50%) calc(50% - 2vh)";
             wallpaper.style.backgroundRepeat = "no-repeat";
-            wallpaper.style.backgroundSize = 'calc(100% + 1vw) calc(100% + 30vh)';
+            wallpaper.style.backgroundSize = 'calc(100% + 3vw) calc(100% + 30vh)';
             nav.style.backgroundColor = "#f0f8ff";
             navHeader.style.color = "black";
             on.style.display = "none";
@@ -79,9 +79,9 @@ function Navbar() {
             window.localStorage.setItem('navItemsBackground', JSON.stringify("linear-gradient( to top right, rgba(255,87,34,1) 0%, rgba(251,140,0 ,1) 100%)"));
             window.localStorage.setItem('navItemsBoxShadow', JSON.stringify("1px 1px 30px rgba(255,111,0 ,1)"));
             window.localStorage.setItem('wallpaper', JSON.stringify(`${homeWallpaper}`));
-            window.localStorage.setItem('wallpaperPosition', JSON.stringify("calc(100% - 0.5vw) calc(60% - 2vh)"));
+            window.localStorage.setItem('wallpaperPosition', JSON.stringify("calc(50%) calc(50% - 2vh)"));
             window.localStorage.setItem('wallpaperRepeat', JSON.stringify('no-repeat'));
-            window.localStorage.setItem('wallpaperSize', JSON.stringify('calc(100% + 1vw) calc(100% + 30vh)'));
+            window.localStorage.setItem('wallpaperSize', JSON.stringify('calc(100% + 3vw) calc(100% + 30vh)'));
 
 
         });
@@ -169,6 +169,9 @@ function Navbar() {
 
                       {auth?.name !== undefined ? <li onClick={() => navigate('/profile')} className="li"> My Profile </li>
                       : null}
+
+                      {auth?.name !== undefined ? <li onClick={() => navigate('/membership')} className="li"  style={{letterSpacing: '1px'}}> Membership </li>
+                        : null}
 
                     </ul>
 
