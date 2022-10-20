@@ -13,6 +13,7 @@ import ForgotPassword from './components/ForgotPassword';
 import ResetPassword from './components/ResetPassword';
 import CardProfile from './components/CardProfile';
 import NotFound from './components/NotFound.jsx';
+import Membership from './components/Membership';
 
 
 const App = () => {
@@ -58,6 +59,7 @@ const App = () => {
         <Route path="/login=true" element={<Login login={location.state?.login} />} />
         <Route path="/logout=true" element={<Login logout={location.state?.logout} />} />
         <Route path="/profile" element={<CardProfile />} />
+        <Route path = "/membership" element={<Membership/>}/>
       </Routes>
     </div>
   );
