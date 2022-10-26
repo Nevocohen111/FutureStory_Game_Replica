@@ -87,6 +87,19 @@ border: 2px solid #551B54;
 body {
   font-family: var(--font);
 }
+#aLink {
+  border-radius: 5px;
+  color: #000;
+  display: inline-block;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: all 0.3s ease-in-out;
+}
+
+#aLink:hover {
+  color: red;
+}
 
 .ul {
   cursor: pointer;

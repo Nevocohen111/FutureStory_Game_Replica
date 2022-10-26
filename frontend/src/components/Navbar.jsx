@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate} from "react-router-dom";
 import AuthContext from '../context/AuthProvider';
 import DeleteUserBtn from './DeleteUserBtn';
 import '../App.css';
@@ -11,7 +11,6 @@ import zakWallpaper from '../assets/images/wallpaper.jpg';
 function Navbar() {
     const { auth, setAuth } = useContext(AuthContext);
     const [checked, setChecked] = React.useState(false);
-    const location = useLocation();
     const { logAsNum, setLogAsNum } = useContext(AuthContext);
     const navigate = useNavigate();
 
@@ -25,6 +24,30 @@ function Navbar() {
         setAuth({});
         setLogAsNum(logAsNum - 1);
         navigate('/logout=true', { state: { logout: auth.name + `, you have been logged out.` } });
+    }
+
+    const handleDeleteMembership = async () => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            mode : 'cors',
+        };
+        await fetch(`http://localhost:8080/user/updateMembership?name=${auth.name}`, requestOptions)
+        .then(res => res.json())
+        .then(() => {
+           logout();
+        })
+    }
+
+    const alertAgreement = () => {
+        const confirm = window.confirm("Are you sure you want to delete your membership?");
+        if (confirm) {
+            handleDeleteMembership();
+        }
+        else {
+            console.log("nothing happaned")
+        }
+
     }
 
     useEffect(() => {
@@ -135,6 +158,11 @@ function Navbar() {
                     </div>
                     <div style={{ position: 'absolute', right: '3rem', top: "1.6rem" }}>
                         {auth?.name !== undefined ? <DeleteUserBtn auth={auth} logout={logout} /> : null}
+                    </div>
+
+                    <div style={{ position: 'absolute',right: '20rem', top: "1.8rem" }}>
+                        {console.log(auth?.membership )}
+                        {auth?.name !== undefined && auth?.membership !==  null && <a id = "aLink" onClick={alertAgreement}>Delete Membership</a>}
                     </div>
 
                     <i id='toggleOff' class="big toggle off icon" style={{ position: 'absolute', left: '90rem', top: '1.6rem', color: 'black' }}></i>

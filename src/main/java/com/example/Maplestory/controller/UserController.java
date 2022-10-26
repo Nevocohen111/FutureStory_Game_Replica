@@ -47,6 +47,18 @@ public class UserController {
         } else {
             return ResponseEntity.status(400).body(new HttpCustomResponse(400, user.getName() + " does not exist"));
         }
+    }
+
+    @PostMapping("/updateMembership")
+    public ResponseEntity<HttpCustomResponse> updateMembership(@RequestParam(value = "name") String name) {
+        User user = userService.findByName(name);
+        if(user != null) {
+            user.setMembership(null);
+            userRepository.save(user);
+            return ResponseEntity.status(200).body(new HttpCustomResponse(200, "Membership has been updated "));
+        }
+
+        return ResponseEntity.status(400).body(new HttpCustomResponse(400, name + " does not exist"));
 
     }
 }
