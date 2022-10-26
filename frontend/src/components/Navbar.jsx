@@ -1,5 +1,5 @@
-import React,{useContext} from 'react'
-import { useNavigate, useLocation} from "react-router-dom";
+import React, { useContext } from 'react'
+import { useNavigate, useLocation } from "react-router-dom";
 import AuthContext from '../context/AuthProvider';
 import DeleteUserBtn from './DeleteUserBtn';
 import '../App.css';
@@ -9,10 +9,10 @@ import homeWallpaper from '../assets/images/homeWallpaper.jpg';
 import zakWallpaper from '../assets/images/wallpaper.jpg';
 
 function Navbar() {
-    const {auth, setAuth} = useContext(AuthContext);
+    const { auth, setAuth } = useContext(AuthContext);
     const [checked, setChecked] = React.useState(false);
     const location = useLocation();
-    const {logAsNum, setLogAsNum} = useContext(AuthContext);
+    const { logAsNum, setLogAsNum } = useContext(AuthContext);
     const navigate = useNavigate();
 
     const logout = () => {
@@ -23,10 +23,10 @@ function Navbar() {
         window.localStorage.removeItem('profile');
         setAuth({});
         setLogAsNum(logAsNum - 1);
-        navigate('/logout=true' , {state : {logout : auth.name + `, you have been logged out.`}});
+        navigate('/logout=true', { state: { logout: auth.name + `, you have been logged out.` } });
     }
-     
-    useEffect (() => {
+
+    useEffect(() => {
         const off = document.getElementById("toggleOff");
         const on = document.getElementById("toggleOn");
         const nav = document.getElementsByClassName("Navbar")[0];
@@ -40,7 +40,7 @@ function Navbar() {
             wallpaper.style.backgroundPosition = "calc(50%) calc(50% - 2vh)";
             wallpaper.style.backgroundRepeat = "no-repeat";
             wallpaper.style.backgroundSize = "calc(100% + 3vw) calc(100% + 30vh)";
-            nav.style.backgroundColor ="#383838";
+            nav.style.backgroundColor = "#383838";
             navHeader.style.color = "white";
             navItems.style.background = "linear-gradient( to top right,rgba(156,204,101 ,1) 0%, rgba(38,198,218 ,1) 50%)";
             navItems.style.boxShadow = "1px 1px 30px rgba(38,198,218 ,1)";
@@ -58,7 +58,7 @@ function Navbar() {
             window.localStorage.setItem('wallpaperRepeat', JSON.stringify('no-repeat'));
             window.localStorage.setItem('wallpaperSize', JSON.stringify('calc(100% + 3vw) calc(100% + 30vh)'));
 
-        
+
 
         });
         on.addEventListener("click", () => {
@@ -96,8 +96,8 @@ function Navbar() {
         const navHeader = document.getElementById("navHeader");
         const navItems = document.getElementsByClassName("ul")[0];
         const wallpaper = document.body;
-        
-        if(JSON.parse(window.localStorage.getItem('checked')) === "true") {
+
+        if (JSON.parse(window.localStorage.getItem('checked')) === "true") {
             setChecked(true);
             nav.style.backgroundColor = JSON.parse(window.localStorage.getItem('navColor'));
             off.style.display = JSON.parse(window.localStorage.getItem('trueOffDisplay'));
@@ -110,7 +110,7 @@ function Navbar() {
             wallpaper.style.backgroundRepeat = JSON.parse(window.localStorage.getItem('wallpaperRepeat'));
             wallpaper.style.backgroundSize = JSON.parse(window.localStorage.getItem('wallpaperSize'));
         }
-        if(JSON.parse(window.localStorage.getItem('checked')) === "false") {
+        if (JSON.parse(window.localStorage.getItem('checked')) === "false") {
             setChecked(false);
             nav.style.backgroundColor = JSON.parse(window.localStorage.getItem('navColor'));
             off.style.display = JSON.parse(window.localStorage.getItem('falseOffDisplay'));
@@ -121,59 +121,62 @@ function Navbar() {
             wallpaper.style.backgroundImage = `url(${window.localStorage.getItem('wallpaper')})`;
             wallpaper.style.backgroundPosition = JSON.parse(window.localStorage.getItem('wallpaperPosition'));
             wallpaper.style.backgroundRepeat = JSON.parse(window.localStorage.getItem('wallpaperRepeat'));
-            wallpaper.style.backgroundSize = JSON.parse(window.localStorage.getItem('wallpaperSize'));   
+            wallpaper.style.backgroundSize = JSON.parse(window.localStorage.getItem('wallpaperSize'));
         }
     }, []);
- 
+
     return (
         <>
             <div>
-                <nav className="Navbar" style={{margin:'0',position:'fixed',top:'-1rem',left:'-1rem',width:'102%',height:'5rem',opacity:'0.7',backgroundColor:'#f0f8ff',display:'flex',alignItems:'center',justifyContent:'center',zIndex:'10000'}}>  
-                <div style={{position:'absolute',left:'3rem'}}>
-                        <a href="/" style={{textDecoration:'none',color:'black',fontSize:'1.5rem',fontWeight:'bold'}} id="navHeader">FutureStory</a>
+                <nav className="Navbar" style={{ margin: '0', position: 'fixed', top: '-1rem', left: '-1rem', width: '102%', height: '5rem', opacity: '0.7', backgroundColor: '#f0f8ff', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: '10000' }}>
+                    <div style={{ position: 'absolute', left: '3rem' }}>
+                        <a href="/" style={{ textDecoration: 'none', color: 'black', fontSize: '1.5rem', fontWeight: 'bold' }} id="navHeader">FutureStory</a>
                     </div>
-                    <div style={{position:'absolute',right:'3rem',top:"1.6rem"}}>
-                    {auth?.name !== undefined ? <DeleteUserBtn auth = {auth} logout = {logout}/>: null} 
-                    </div>
-                   
-                 <i id='toggleOff' class="big toggle off icon" style={{position:'absolute',left:'85rem',top:'1.6rem',color:'black'}}></i>
-                
-                 <i id='toggleOn' class="big toggle on icon" style={{position:'absolute',left:'85rem',top:'1.6rem',color:'black'}}></i>
-
-
-                    <div style={{position:'absolute',left:'14rem',top:"0.9rem"}} onClick = {() => navigate('/profile')}>
-                    {auth?.name !== undefined ? <ProfileCircle/>: null} 
+                    <div style={{ position: 'absolute', right: '3rem', top: "1.6rem" }}>
+                        {auth?.name !== undefined ? <DeleteUserBtn auth={auth} logout={logout} /> : null}
                     </div>
 
-                    <div style={{position:'relative',left:'-10rem',top:'0.2rem'}}>
-                        <a href="/" style={{textDecoration:'none',color:'green',fontSize:'1rem',fontWeight:'bold'}}>Online : {logAsNum > 0 ? logAsNum : 0}</a>
+                    <i id='toggleOff' class="big toggle off icon" style={{ position: 'absolute', left: '90rem', top: '1.6rem', color: 'black' }}></i>
+
+                    <i id='toggleOn' class="big toggle on icon" style={{ position: 'absolute', left: '90rem', top: '1.6rem', color: 'black' }}></i>
+
+
+                    <div style={{ position: 'absolute', left: '14rem', top: "0.9rem" }} onClick={() => navigate('/profile')}>
+                        {auth?.name !== undefined ? <ProfileCircle /> : null}
                     </div>
-                    <ul className='ul' style={{position:'relative',left:'-3.25rem',top:'0.2rem'}}>
+
+                    <div style={{ position: 'relative', left: '-10rem', top: '0.2rem' }}>
+                        <a href="/" style={{ textDecoration: 'none', color: 'green', fontSize: '1rem', fontWeight: 'bold' }}>Online : {logAsNum > 0 ? logAsNum : 0}</a>
+                    </div>
+                    <ul className='ul' style={{ position: 'relative', left: '-3.25rem', top: '0.2rem' }}>
                         <li onClick={() => navigate('/home')} className="li">
                             Home
                         </li>
-                   
-                       {auth?.name === undefined ? <li onClick={() => navigate('/register')} className="li">
-                           Sign Up
+
+                        {auth?.name === undefined ? <li onClick={() => navigate('/register')} className="li">
+                            Sign Up
                         </li> : null}
 
 
                         {auth?.name === undefined ? <li onClick={() => navigate('/login')} className="li">
-                           Log In
+                            Log In
                         </li> : null}
 
-                        {auth?.name !== undefined ?<li className="li" onClick={() => logout()} >
+                        {auth?.name !== undefined ? <li className="li" onClick={() => logout()} >
                             Log Out
-                        </li>  : null}
+                        </li> : null}
 
                         {auth?.name === undefined ? <li onClick={() => navigate('/forgotPassword')} className="li">
                             Forgot Password </li> : null}
 
-                      {auth?.name !== undefined ? <li onClick={() => navigate('/profile')} className="li"> My Profile </li>
-                      : null}
+                        {auth?.name !== undefined ? <li onClick={() => navigate('/profile')} className="li"> My Profile </li>
+                            : null}
 
-                      {auth?.name !== undefined ? <li onClick={() => navigate('/membership')} className="li"  style={{letterSpacing: '1px'}}> Membership </li>
-                        : null}
+                        {auth?.name !== undefined ? <li onClick={() => navigate('/membership')} className="li" style={{ letterSpacing: '1px' }}> Membership </li>
+                            : null}
+
+                        {auth?.membership === "gm" ? <li onClick={() => navigate('/users')} className="li" style={{ letterSpacing: '1px' }}> Users </li>
+                            : null}
 
                     </ul>
 

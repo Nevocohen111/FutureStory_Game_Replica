@@ -2,6 +2,7 @@ package com.example.Maplestory.controller;
 
 import com.example.Maplestory.entity.User;
 import com.example.Maplestory.repository.UserRepository;
+import com.example.Maplestory.response.Response;
 import com.example.Maplestory.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,9 +29,9 @@ public class MembershipController {
 
 
     @PostMapping("/add")
-    public ResponseEntity<User> AddMembership(@RequestBody User user, @RequestParam(required = false, value = "name") String name) throws MessagingException, UnsupportedEncodingException {
+    public ResponseEntity<Response> AddMembership(@RequestBody User user, @RequestParam(required = false, value = "name") String name) throws MessagingException, UnsupportedEncodingException {
         User currentUser = userService.findByName(name);
-        if (currentUser != null) {
+        if (currentUser != null && currentUser.getMembership().isEmpty()) {
             switch (user.getMembership()) {
                 case "gm" -> sendGmEmail(user.getEmail());
                 case "inspector" -> sendInspectorEmail(user.getEmail());
@@ -38,9 +39,14 @@ public class MembershipController {
             }
             currentUser.setMembership(user.getMembership());
             userRepository.save(currentUser);
-            return ResponseEntity.status(200).body(currentUser);
+            return ResponseEntity.status(200).body(new Response("Membership has been added"));
         }
-        return ResponseEntity.status(400).body(null);
+        else if(currentUser != null && !currentUser.getMembership().isEmpty()){
+            return ResponseEntity.status(400).body(new Response("Membership has already been added"));
+        }
+        else {
+            return ResponseEntity.status(400).body(new Response("User does not exist"));
+        }
     }
 
     public void sendGmEmail(String recipientEmail) throws MessagingException, UnsupportedEncodingException {

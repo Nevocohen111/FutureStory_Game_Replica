@@ -126,12 +126,14 @@ function Login({ registered, logout, login, resetOK }) {
             const response = await fetch('http://localhost:8080/login/add', requestOptions)
             const data = await response.json();
             if (response.status === 200) {
+                const membership = data.membership;
                 const name = data.name;
                 const email = data.email;
                 const verified = data.verified;
                 setLogAsNum(logAsNum + 1);
-                setAuth({ name, email, verified });
+                setAuth({ name, email, verified , membership});
                 window.localStorage.setItem('profile', JSON.stringify("profile"));
+                window.localStorage.setItem('membership', JSON.stringify(membership));
                 navigate('/home&authorized=true');
                 if (isCookie)
                     submit();

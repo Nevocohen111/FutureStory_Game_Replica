@@ -52,7 +52,6 @@ public class ForgotPasswordController {
     @PutMapping("/resetPassword")
     public ResponseEntity<Response> resetPassword(@RequestParam(value = "token",required = false) String token,@RequestBody User user) {
         if(token != null) {
-            System.out.println(user.getPwd());
             User currentUser = userService.getByResetPasswordToken(token);
             if(currentUser != null) {
                 if(user.getPwd().matches("^(?=.*[A-Z])(?=.*[0-9]).{6,}$")) {

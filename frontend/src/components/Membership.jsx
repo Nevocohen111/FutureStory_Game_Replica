@@ -43,17 +43,26 @@ function Membership() {
         };
         const response = await fetch(`http://localhost:8080/membership/add?name=${auth?.name}`, requestOptions);
         const data = await response.json();
-        if (data) {
+        if (data.response === "Membership has been added") {
             document.getElementById('apply').style.display = "block";
             document.getElementById('apply').style.position = "relative";
             document.getElementById('apply').innerHTML = "Applied";
             document.getElementById('apply').style.left = "3rem";
             document.getElementById('apply').style.color = "green";
             setInspectorLoader(false);
-        }
+        
         setTimeout(() => {
             window.location.reload();
         }, 2000);
+    }else {
+        document.getElementById('apply').style.display = "block";
+        document.getElementById('apply').style.position = "relative";
+        document.getElementById('apply').innerHTML = "Already applied";
+        document.getElementById('apply').style.left = "2.5rem";
+        document.getElementById('apply').style.padding = "0.7rem";
+        document.getElementById('apply').style.color = "red";
+        setInspectorLoader(false);
+    }
         return clearTimeout();
     }
 
@@ -70,17 +79,25 @@ function Membership() {
         };
         const response = await fetch(`http://localhost:8080/membership/add?name=${auth?.name}`, requestOptions);
         const data = await response.json();
-        if (data) {
+        if (data.response === "Membership has been added") {
             document.getElementById('go').style.display = "block";
             document.getElementById('go').style.position = "relative";
             document.getElementById('go').innerHTML = "Applied";
-            document.getElementById('go').style.left = "3rem";
+            document.getElementById('go').style.left = "4rem";
             document.getElementById('go').style.color = "green";
             setGmLoader(false);
-        }
         setTimeout(() => {
             window.location.reload();
         }, 2000);
+    } else {
+        document.getElementById('go').style.display = "block";
+        document.getElementById('go').style.position = "relative";
+        document.getElementById('go').innerHTML = "Already applied";
+        document.getElementById('go').style.left = "3rem";
+        document.getElementById('go').style.padding = "0.7rem";
+        document.getElementById('go').style.color = "red";
+        setGmLoader(false);
+    }
         return clearTimeout();
     }
 
@@ -98,17 +115,25 @@ function Membership() {
         };
         const response = await fetch(`http://localhost:8080/membership/add?name=${auth?.name}`, requestOptions);
         const data = await response.json();
-        if (data) {
+        if (data.response === "Membership has been added") {
             document.getElementById('test').style.display = "block";
             document.getElementById('test').style.position = "relative";
             document.getElementById('test').innerHTML = "Applied";
             document.getElementById('test').style.left = "3rem";
             document.getElementById('test').style.color = "green";
             setTesterLoader(false);
-        }
         setTimeout(() => {
             window.location.reload();
         }, 2000);
+    }else {
+        document.getElementById('test').style.display = "block";
+        document.getElementById('test').style.position = "relative";
+        document.getElementById('test').innerHTML = "Already Applied";
+        document.getElementById('test').style.left = "3rem";
+        document.getElementById('test').style.padding = "0.7rem";
+        document.getElementById('test').style.color = "red";
+        setTesterLoader(false);
+    }
         return clearTimeout();
     }
 
@@ -132,7 +157,7 @@ function Membership() {
                         <li>Want more information?</li>
                     </ul>
                     <button onClick={onHandleInspector} id="apply">Apply Here</button>
-                    {inspectorLoader && <div class="ui active centered inline loader" style={{ position: 'relative', left: '-0.5rem' }}></div>}
+                    {inspectorLoader && <div class="ui active centered inline loader" style={{ position: 'relative', left: '-0.1rem' }}></div>}
                 </div>
                 <div class="promo scale">
                     <div class="deal">
@@ -147,7 +172,7 @@ function Membership() {
                         <li>Are you interested?</li>
                     </ul>
                     <button onClick={onHandleGm} id="go">Lets Go</button>
-                    {gmLoader && <div class="ui active centered inline loader" style={{ position: 'relative', left: '-0.5rem' }}></div>}
+                    {gmLoader && <div class="ui active centered inline loader" style={{ position: 'relative', left: '-0.1rem' }}></div>}
 
                 </div>
                 <div class="promo">
@@ -163,7 +188,7 @@ function Membership() {
                         <li>Want to try?</li>
                     </ul>
                     <button onClick={onHandleTester} id="test">Press Me</button>
-                    {testerLoader && <div class="ui active centered inline loader" style={{ position: 'relative', left: '-0.5rem' }}></div>}
+                    {testerLoader && <div class="ui active centered inline loader" style={{ position: 'relative', left: '-0.1rem' }}></div>}
                 </div>
             </div>
         </div>
