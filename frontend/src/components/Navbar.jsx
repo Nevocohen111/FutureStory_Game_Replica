@@ -45,7 +45,7 @@ function Navbar() {
             handleDeleteMembership();
         }
         else {
-            console.log("nothing happaned")
+            console.log("nothing happaned");
         }
 
     }
@@ -55,8 +55,10 @@ function Navbar() {
         const on = document.getElementById("toggleOn");
         const nav = document.getElementsByClassName("Navbar")[0];
         const navHeader = document.getElementById("navHeader");
-        const navItems = document.getElementsByClassName("ul")[0];
         const wallpaper = document.body;
+        const navItems = document.getElementsByClassName("ul")[0];
+
+   
 
         off.addEventListener("click", () => {
             setChecked(true);
@@ -81,9 +83,6 @@ function Navbar() {
             window.localStorage.setItem('wallpaperPosition', JSON.stringify('calc(50% - 1vw) calc(50% - 2vh)'));
             window.localStorage.setItem('wallpaperRepeat', JSON.stringify('no-repeat'));
             window.localStorage.setItem('wallpaperSize', JSON.stringify('calc(100% + 3vw) calc(100% + 30vh)'));
-
-
-
         });
         on.addEventListener("click", () => {
             setChecked(false);
@@ -107,9 +106,7 @@ function Navbar() {
             window.localStorage.setItem('wallpaper', JSON.stringify(`${homeWallpaper}`));
             window.localStorage.setItem('wallpaperPosition', JSON.stringify("calc(50%) calc(50% - 2vh)"));
             window.localStorage.setItem('wallpaperRepeat', JSON.stringify('no-repeat'));
-            window.localStorage.setItem('wallpaperSize', JSON.stringify('calc(100% + 3vw) calc(100% + 30vh)'));
-
-
+            window.localStorage.setItem('wallpaperSize', JSON.stringify('calc(100% + 3vw) calc(100% + 30vh)'))
         });
     }, [checked]);
 
@@ -161,8 +158,8 @@ function Navbar() {
                     </div>
 
                     <div style={{ position: 'absolute',right: '20rem', top: "1.8rem" }}>
-                        {console.log(auth?.membership )}
-                        {auth?.name !== undefined && auth?.membership !==  null && <a id = "aLink" onClick={alertAgreement}>Delete Membership</a>}
+                        {console.log(window.localStorage.getItem('linkColor') )}
+                        {auth?.name !== undefined && auth?.membership !==  null && <a id = "aLink" style={{color : JSON.parse(window.localStorage.getItem('wallpaper')) === "/static/media/homeWallpaper.75928c8d3cb5b26a093b.jpg" ? 'black' : 'white'}} onClick={alertAgreement}>Delete Membership</a>}
                     </div>
 
                     <i id='toggleOff' class="big toggle off icon" style={{ position: 'absolute', left: '90rem', top: '1.6rem', color: 'black' }}></i>

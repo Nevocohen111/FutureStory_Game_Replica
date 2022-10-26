@@ -50,7 +50,7 @@ border-radius: 50%;
 height: 50px;
 width: 50px;
 color: #fff;
-cursor: pointer;
+cursor:  url("assets/images/gam308.jpg"), default;
 animation: movebtn 3s ease-in-out infinite;
 transition: all .5s ease-in-out;
 }
@@ -89,20 +89,14 @@ body {
 }
 #aLink {
   border-radius: 5px;
-  color: #000;
   display: inline-block;
   font-size: 1.2rem;
   font-weight: 700;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
 }
-
-#aLink:hover {
-  color: red;
-}
-
 .ul {
-  cursor: pointer;
+  cursor:url("assets/images/gam308.jpg"), default;
   color: var(--color-bg);
   background: var(--color-home);
 }
