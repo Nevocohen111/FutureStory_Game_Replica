@@ -21,6 +21,7 @@ function Navbar() {
         window.localStorage.removeItem('error');
         window.localStorage.removeItem('member');
         window.localStorage.removeItem('profile');
+        window.localStorage.removeItem('membership');
         setAuth({});
         setLogAsNum(logAsNum - 1);
         navigate('/logout=true', { state: { logout: auth.name + `, you have been logged out.` } });

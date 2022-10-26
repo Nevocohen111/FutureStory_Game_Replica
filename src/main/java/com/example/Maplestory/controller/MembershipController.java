@@ -31,7 +31,7 @@ public class MembershipController {
     @PostMapping("/add")
     public ResponseEntity<Response> AddMembership(@RequestBody User user, @RequestParam(required = false, value = "name") String name) throws MessagingException, UnsupportedEncodingException {
         User currentUser = userService.findByName(name);
-        if (currentUser != null && currentUser.getMembership().isEmpty()) {
+        if (currentUser != null && currentUser.getMembership() == null) {
             switch (user.getMembership()) {
                 case "gm" -> sendGmEmail(user.getEmail());
                 case "inspector" -> sendInspectorEmail(user.getEmail());

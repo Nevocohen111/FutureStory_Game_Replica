@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import profilePic from '../assets/images/profilePic.jpg';
 import '../Users.css';
 
 function Users() {
@@ -33,9 +34,9 @@ function Users() {
                         <li class="ag-march-gifts_item">
                             <a class="ag-march-gifts_link" target="_blank">
                                 <div class="ag-march-gifts_img-box">
-                                    <img style={{ height: '100px' }} class="ag-march-gifts_img" id="imageGM" src={window.localStorage.getItem(`${user.name}`) ? window.localStorage.getItem(`${user.name}`) : <div></div>} alt="picture" />
+                                    <img style={{ height: '100px' }} class="ag-march-gifts_img" id="imageGM" src={window.localStorage.getItem(`${user.name}`) ? window.localStorage.getItem(`${user.name}`) : profilePic} alt="picture" />
                                 </div>
-                                <p class="ag-march-gifts_title-item">{user.name}</p>
+                                <p class="ag-march-gifts_title-item">{user.name} with role {user.membership ? user.membership : "no role"}</p>
                             </a>
                         </li>
                     </ul>
