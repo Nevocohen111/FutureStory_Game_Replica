@@ -119,8 +119,8 @@ function Support() {
 
     return (
         <>
-            <a id='contactIcon' onClick={() => openForm()} style={{ marginTop: '4rem', marginRight: '1.2rem', zIndex: '9999' }}><i style={{ marginLeft: '3px' }} className="envelope open outline icon"></i></a>
-            <div id="contactForm" className="contactForm ">
+            <a id='contactIcon' onClick={() => openForm()} style={{ marginTop: '6rem', marginRight: '1.2rem', zIndex: '9999' }}><i style={{ marginLeft: '3px' }} className="envelope open outline icon"></i></a>
+            <div id="contactForm" className="contactForm" style={{marginTop:'2rem'}}>
                 <div></div>
                 <a id="closeBtn" onClick={() => closeForm()} ><i className="close icon"></i></a>
                 <h3>Contact Us</h3>

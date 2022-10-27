@@ -21,7 +21,7 @@ function DeleteUserBtn({auth,logout}) {
 
   return (
     <div>
-        <li className=' small negative ui button' onClick={() => setShowPortal(true)}  >Delete Account</li>
+        <li className=' small negative ui button' onClick={() => setShowPortal(true)} style={{position:'relative',top:'-12px'}}  >Delete Account</li>
         {showPortal && <DeleteBtnPortal handleDelete={handleDelete} onClose = {() => setShowPortal(false)} showPortal={showPortal}/>}
       
     </div>

@@ -1,6 +1,7 @@
 body { 
   /** background image */
   background-image: url("assets/images/homeWallpaper.jpg");
+  overflow: calc(100vh - 100px);
   background-position: calc(50% - 0.5vw) calc(50% - 2vh);
   background-repeat: no-repeat;
   background-size: calc(100% + 1vw) calc(100% + 30vh);

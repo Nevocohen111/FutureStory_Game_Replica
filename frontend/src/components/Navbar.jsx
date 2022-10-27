@@ -7,6 +7,7 @@ import ProfileCircle from './ProfileCircle';
 import { useEffect } from 'react';
 import homeWallpaper from '../assets/images/homeWallpaper.jpg';
 import zakWallpaper from '../assets/images/wallpaper.jpg';
+import Marquee from './Marquee';
 
 function Navbar() {
     const { auth, setAuth } = useContext(AuthContext);
@@ -149,32 +150,34 @@ function Navbar() {
     return (
         <>
             <div>
-                <nav className="Navbar" style={{ margin: '0', position: 'fixed', top: '-1rem', left: '-1rem', width: '102%', height: '5rem', opacity: '0.7', backgroundColor: '#f0f8ff', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: '10000' }}>
+              
+                <nav className="Navbar" style={{ margin: '0', position: 'fixed', top: '2rem', left: '-1rem', width: '102%', height: '4rem', opacity: '0.7', backgroundColor: '#f0f8ff', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: '10000' }}>
+                <Marquee/>
                     <div style={{ position: 'absolute', left: '3rem' }}>
                         <a href="/" style={{ textDecoration: 'none', color: 'black', fontSize: '1.5rem', fontWeight: 'bold' }} id="navHeader">FutureStory</a>
+                    </div>
+                    <div style={{ position: 'absolute', left: '14rem',top:'0.4rem' }} onClick={() => navigate('/profile')}>
+                        {auth?.name !== undefined ? <ProfileCircle /> : null}
                     </div>
                     <div style={{ position: 'absolute', right: '3rem', top: "1.6rem" }}>
                         {auth?.name !== undefined ? <DeleteUserBtn auth={auth} logout={logout} /> : null}
                     </div>
 
-                    <div style={{ position: 'absolute',right: '20rem', top: "1.8rem" }}>
-                        {console.log(window.localStorage.getItem('linkColor') )}
+                    <div style={{ position: 'absolute',right: '20rem', top: "1rem" }}>
                         {auth?.name !== undefined && auth?.membership !==  null && <a id = "aLink" style={{color : JSON.parse(window.localStorage.getItem('wallpaper')) === "/static/media/homeWallpaper.75928c8d3cb5b26a093b.jpg" ? 'black' : 'white'}} onClick={alertAgreement}>Delete Membership</a>}
                     </div>
 
-                    <i id='toggleOff' class="big toggle off icon" style={{ position: 'absolute', left: '90rem', top: '1.6rem', color: 'black' }}></i>
+                    <i id='toggleOff' class="big toggle off icon" style={{ position: 'absolute', left: '90rem', top: '1rem', color: 'black' }}></i>
 
-                    <i id='toggleOn' class="big toggle on icon" style={{ position: 'absolute', left: '90rem', top: '1.6rem', color: 'black' }}></i>
+                    <i id='toggleOn' class="big toggle on icon" style={{ position: 'absolute', left: '90rem', top: '1rem', color: 'black' }}></i>
 
 
-                    <div style={{ position: 'absolute', left: '14rem', top: "0.9rem" }} onClick={() => navigate('/profile')}>
-                        {auth?.name !== undefined ? <ProfileCircle /> : null}
-                    </div>
+                   
 
                     <div style={{ position: 'relative', left: '-10rem', top: '0.2rem' }}>
                         <a href="/" style={{ textDecoration: 'none', color: 'green', fontSize: '1rem', fontWeight: 'bold' }}>Online : {logAsNum > 0 ? logAsNum : 0}</a>
                     </div>
-                    <ul className='ul' style={{ position: 'relative', left: '-3.25rem', top: '0.2rem' }}>
+                    <ul className='ul' style={{ position: 'relative', left: '-2rem' }}>
                         <li onClick={() => navigate('/home')} className="li">
                             Home
                         </li>

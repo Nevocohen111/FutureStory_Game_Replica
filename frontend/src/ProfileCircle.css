@@ -13,8 +13,8 @@ padding: 5px;
  background: linear-gradient(to bottom, #70fc45, #be1dfd, #148dd3);
 }
 .image_inner_container img{
-    height: 50px;
-    width: 50px;
+    height: 43px;
+    width: 43px;
     border-radius: 50%;
     border: 5px solid white;
 }
